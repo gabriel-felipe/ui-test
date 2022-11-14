@@ -1,17 +1,6 @@
 <template>
   <div class="home">
     <div class="messages-holder">
-      <div class="fixedMessages" :style="{height: height+'px'}">
-        <MessageComponent
-            v-for="m in messages"
-            v-show="fixedClasses.includes(m.key)"
-            :key="m.key"
-            :level="m.level"
-            :parent="m.parent"
-        >
-          {{m.message}}
-        </MessageComponent>
-      </div>
       <div class="messages">
         <MessageComponent
             v-for="m in messages"
@@ -19,16 +8,13 @@
             :id="'m-'+m.key"
             :level="m.level"
             :parent="m.parent"
-            :class="{fixed: fixedClasses.includes(m.key), messageList: true}"
+            :childs="m.childs"
+            :class="{messageList: true}"
+            :post-type="m.postType"
         >
           {{m.message}}
         </MessageComponent>
       </div>
-    </div>
-    <div class="first-message">
-      FIRST MESSAGE: {{firstMessage}}! <br />
-      {{fixedClasses}} <br />
-      {{firstMessageContent}}
     </div>
   </div>
 </template>
@@ -39,32 +25,51 @@ import MessageComponent from '@/components/message.vue'; // @ is an alias to /sr
 
 const messages = []
 for (let i=0; i<10; i++) {
-
-  messages.push({
-    message: "Message "+i+ "",
+  let message = {
+    message: "The real question "+(i+1)+ "",
     parent: "",
     level: 0,
-    key: String(i)
-  })
+    key: String(i),
+    childs: [],
+    postType: "question",
+  }
 
-  const nChilds = Math.floor(Math.random() * 3);
+  let nChilds = Math.floor(Math.random() * 3);
   for (let j=0; j<=nChilds; j++) {
-    messages.push({
-      message: "Message "+i+" CHILD "+j+"",
+    let childMessage = {
+      message: "Message "+i+" CHILD "+j,
       parent: String(i),
       level: 1,
-      key: String(i)+String(j)
-    })
-    const nGranChilds = Math.floor(Math.random() * 3);
+      key: String(i),
+      childs: [],
+      postType: "reply",
+    }
+    let nGranChilds = Math.floor(Math.random() * 3);
     for (let k=0; k<=nGranChilds; k++) {
-      messages.push({
+      let grandChild = {
         message: "Message "+i+" CHILD "+j+" CHILD "+k+"",
         parent: String(i)+String(j),
         level: 2,
-        key: String(i)+String(j)+String(k)
-      })
+        key: String(i)+String(j)+String(k),
+        childs: [],
+        postType: "reply",
+      }
+      let nGranGrandChilds = Math.floor(Math.random() * 3);
+      for (let l=0; l<=nGranGrandChilds; l++) {
+        grandChild.childs.push({
+          message: "Message "+i+" CHILD "+j+" CHILD "+k+" CHILD "+l+"",
+          parent: String(i)+String(j),
+          level: 3,
+          key: String(i)+String(j)+String(k),
+          childs: [],
+          postType: "reply",
+        })
+      }
+      childMessage.childs.push(grandChild)
     }
+    message.childs.push(childMessage)
   }
+  messages.push(message)
 }
 
 @Component({
@@ -77,68 +82,49 @@ for (let i=0; i<10; i++) {
     firstMessageContent: '',
     scrolling: false
   }),
-  mounted() {
-    this.checkMessages()
-    document.addEventListener("scroll", this.checkMessages)
-  },
   computed: {
-    height() {
-      return (this.fixedClasses.length * 51)
-    },
-    fixedClasses() {
-      let ids = this.firstMessage.substr(2,this.firstMessage.length - 2)
-      let result = []
-      while (ids.length > 0) {
-        if(this.messages.some(m => m.parent === ids)) {
-          result.push(ids);
-        }
-        ids = ids.substr(0, ids.length-1)
-      }
-      return result
-    },
-    lastClass() {
-      return this.fixedClasses[0]
-    }
-
+    // height() {
+    //   return (this.fixedClasses.length * 51)
+    // },
+    // fixedClasses() {
+    //   let ids = this.firstMessage.substr(2,this.firstMessage.length - 2)
+    //   let result = []
+    //   while (ids.length > 0) {
+    //     if(this.messages.some(m => m.parent === ids)) {
+    //       result.push(ids);
+    //     }
+    //     ids = ids.substr(0, ids.length-1)
+    //   }
+    //   return result
+    // },
+    // lastClass() {
+    //   return this.fixedClasses[0]
+    // }
   },
   methods: {
-    isInViewport(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-          rect.top >= -10 + this.height &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-    },
-    checkMessages() {
-      if(this.scrolling) return
-      let messages = Array.from(document.querySelectorAll('.messageList'))
-      let visible = 0;
-      messages.every(m => {
-        if(this.isInViewport(m)) {
-          this.firstMessage = m.id
-          this.firstMessageContent = m.textContent
-          return false
-        }
-        return true;
-      })
-    }
+    // isInViewport(element) {
+    //   const rect = element.getBoundingClientRect();
+    //   return (
+    //       rect.top >= -10 + this.height &&
+    //       rect.left >= 0 &&
+    //       rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    //       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    //   );
+    // },
+    // checkMessages() {
+    //   if(this.scrolling) return
+    //   let messages = Array.from(document.querySelectorAll('.messageList'))
+    //   let visible = 0;
+    //   messages.every(m => {
+    //     if(this.isInViewport(m)) {
+    //       this.firstMessage = m.id
+    //       this.firstMessageContent = m.textContent
+    //       return false
+    //     }
+    //     return true;
+    //   })
+    // }
   },
-  watch: {
-    fixedClasses(newValue, oldValue) {
-      let newLength = newValue.length
-      let oldLength = oldValue.length
-      if (newLength < oldLength) {
-        this.scrolling = true
-        let first = document.getElementById('m-'+newValue[newValue.length - 1]).getBoundingClientRect()
-        window.scrollTo({ top: window.scrollY + first.top, behavior: 'smooth'})
-        window.setTimeout(() => {
-          this.scrolling = false
-        }, 300)
-      }
-    }
-  }
 })
 export default class Home extends Vue {}
 </script>
@@ -148,23 +134,23 @@ export default class Home extends Vue {}
   display: flex;
   flex-direction: column;
 }
-.first-message {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  background: #000;
-  color: #fff;
-  padding: 20px;
-}
-.fixedMessages {
-  position: fixed;
-  top: 0;
-  left: 0%;
-  width: 100%;
-  background: #fff;
-  box-shadow: 0 0 4px rgba(0,0,0,0.4);
-  z-index: 999;
-  border-bottom: 5px solid #Fff;
-}
+/*.first-message {*/
+/*  display: none;*/
+/*  position: fixed;*/
+/*  bottom: 0;*/
+/*  right: 0;*/
+/*  background: #000;*/
+/*  color: #fff;*/
+/*  padding: 20px;*/
+/*}*/
+/*.fixedMessages {*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  left: 0%;*/
+/*  width: 100%;*/
+/*  background: #fff;*/
+/*  box-shadow: 0 0 4px rgba(0,0,0,0.4);*/
+/*  z-index: 999;*/
+/*  border-bottom: 5px solid #Fff;*/
+/*}*/
 </style>
