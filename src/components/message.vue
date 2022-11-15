@@ -1,7 +1,7 @@
 <template>
   <div class="message" :class="['level-'+level]">
     <div class="title" ref="title"
-         :style="{zIndex: (level - 50) * -1, top: (level * 50) + 'px', position: (childs.length > 0) ? 'sticky' : 'static' }"
+         :style="{borderLeftWidth: (level * 10) + 'px', zIndex: (level - 50) * -1, top: (level * 50) + 'px', position: (childs.length > 0) ? 'sticky' : 'static' }"
          :class="{sticky: (sticky && parentSticky), reply: postType === 'reply'}"
     >
       <template v-if="postType === 'question'">
@@ -15,7 +15,7 @@
         <div class="snippet">lorem ipsum dolor sit amet...</div>
       </template>
     </div>
-    <div class="body">
+    <div class="body" :style="{paddingLeft: ((level + 1) * 10) + 'px'}">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut autem consequuntur dolor eos eum exercitationem, facilis illum ipsum laudantium magnam maxime minus nesciunt omnis pariatur quae quod rerum suscipit veniam.
     </div>
 <!--    <div class="shadow">-->
@@ -134,7 +134,6 @@ export default {
   height: 50px;
   background: rgba(230,230,230,1);
   max-height: 1000px;
-  overflow: hidden;
   text-align: left;
 }
 .reply.title {
@@ -142,6 +141,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  border-left: 1px solid black;
 }
 
 .reply.title .snippet {
@@ -186,6 +186,18 @@ export default {
   color: #fff !important;
   box-shadow: 0 0 0 2px #000;
 }
+
+/*.title.sticky:before {*/
+/*  content: "";*/
+/*  display: block;*/
+/*  position: absolute;*/
+/*  background: #fff;*/
+/*  width: 100vw;*/
+/*  height: 100%;*/
+/*  left: 0;*/
+/*  top: 0;*/
+/*  z-index: -2;*/
+/*}*/
 
 .title.sticky .date {
   color: #fff !important;
