@@ -15,7 +15,7 @@
         <div class="snippet">lorem ipsum dolor sit amet...</div>
       </template>
     </div>
-    <div class="body" :style="{paddingLeft: ((level + 1) * 10) + 'px'}">
+    <div class="body" :style="{paddingLeft: ((level + 1) * 5) + 'px'}">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut autem consequuntur dolor eos eum exercitationem, facilis illum ipsum laudantium magnam maxime minus nesciunt omnis pariatur quae quod rerum suscipit veniam.
     </div>
 <!--    <div class="shadow">-->
