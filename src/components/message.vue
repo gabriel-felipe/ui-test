@@ -1,7 +1,7 @@
 <template>
   <div class="message" :class="['level-'+level]">
     <div class="title" ref="title"
-         :style="{borderLeftWidth: (level * 10) + 'px', zIndex: (level - 50) * -1, top: (level * 50) + 'px', position: (childs.length > 0) ? 'sticky' : 'static' }"
+         :style="{marginLeft: padding+'px', width: width, zIndex: (level - 50) * -1, top: (level * 50) + 'px', position: (childs.length > 0) ? 'sticky' : 'static' }"
          :class="{sticky: (sticky && parentSticky), reply: postType === 'reply'}"
     >
       <template v-if="postType === 'question'">
@@ -10,7 +10,7 @@
       <template v-else>
         <div class="top">
           <span class="date">11/14/22 20:42</span>
-          <span class="author">@{{ getAuthorName() }}:</span>
+          <span class="author">@{{ author }}:</span>
         </div>
         <div class="snippet">lorem ipsum dolor sit amet...</div>
       </template>
@@ -32,6 +32,7 @@
           :childs="m.childs"
           :class="{messageList: true}"
           :post-type="m.postType"
+          :author="m.author"
       >
         {{m.message}}
       </MessageComponent>
@@ -62,14 +63,24 @@ export default {
     postType: {
       type: String,
       default: "question"
+    },
+    author: {
+      type: String,
+      default: ""
     }
   },
   data() {
     return {
-     sticky: false
+     sticky: false,
     }
   },
   computed: {
+    width() {
+      return "calc(100% - "+this.padding+"px)";
+    },
+    padding() {
+      return this.level * 5
+    },
     topLimit() {
       let limit = this.level * 50
       if(this.level >= 1) {
@@ -81,19 +92,11 @@ export default {
   mounted() {
     window.setInterval(() => {
       if(this.$refs.title) {
-        if(this.isInViewport(this.$refs.title) && this.childs.length > 0) {
-          this.sticky = true
-        } else {
-          this.sticky = false
-        }
+        this.sticky = !!(this.isInViewport(this.$refs.title) && this.childs.length > 0);
       }
     }, 100);
   },
   methods: {
-    getAuthorName() {
-      let items = ["Gabriel", "Reed", "Oliver"]
-      return items[Math.floor(Math.random()*items.length)]
-    },
     isInViewport(element) {
       const rect = element.getBoundingClientRect();
       const scrollY = window.scrollY
@@ -141,7 +144,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  border-left: 1px solid black;
+  border-left: 1px solid transparent;
 }
 
 .reply.title .snippet {
@@ -160,31 +163,9 @@ export default {
   opacity: 0;
   visibility: hidden;
 }
-.level-1 .title {
-  background: rgba(200,200,200,1);
-}
-.level-2 .title {
-  background: rgba(100,100,100,1);
-  color: #fff;
-}
-.level-3 .title {
-  background: rgba(60,60,60,1);
-  color: #fff;
-}
-
-.level-1 .date {
-  color: #333;
-}
-
-.level-2 .date {
-  color: #fff;
-}
 
 .title.sticky {
   max-height: 50px;
-  background: #000 !important;
-  color: #fff !important;
-  box-shadow: 0 0 0 2px #000;
 }
 
 /*.title.sticky:before {*/
@@ -199,24 +180,38 @@ export default {
 /*  z-index: -2;*/
 /*}*/
 
-.title.sticky .date {
-  color: #fff !important;
+.level-0 .title {
+  background: #e0e0e0;
 }
 
+.level-1 .title {
+  background: #cdcdcd;
+}
+
+.level-2 .title {
+  background: #a5a5a5;
+}
+
+.level-3 .title, .level-2 .title {
+  background: #888;
+  color: #fff;
+}
+
+.level-3 .title {
+  background: #666;
+}
+
+.level-3 .title .date, .level-2 .title .date {
+  color: #fff;
+}
 
 .level-1 .title.sticky {
   max-height: 50px;
-  background: #222 !important;
-  color: #fff !important;
 }
 .level-2 .title.sticky {
   max-height: 50px;
-  background: #444 !important;
-  color: #fff !important;
 }
 .level-3 .title.sticky {
   max-height: 50px;
-  background: #666 !important;
-  color: #fff !important;
 }
 </style>

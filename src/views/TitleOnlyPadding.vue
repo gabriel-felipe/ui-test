@@ -11,7 +11,6 @@
             :childs="m.childs"
             :class="{messageList: true}"
             :post-type="m.postType"
-            :author="m.author"
         >
           {{m.message}}
         </MessageComponent>
@@ -137,11 +136,15 @@ for (let i=0; i<10; i++) {
 })
 export default class Home extends Vue {}
 </script>
-<style>
+<style scoped>
 .messages-holder {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+::v-deep .body {
+  padding-left: 0 !important;
 }
 /*.first-message {*/
 /*  display: none;*/
