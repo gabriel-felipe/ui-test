@@ -1,7 +1,7 @@
 <template>
   <div class="message" :class="['level-'+level]">
     <div class="title" ref="title"
-         :style="{marginLeft: padding+'px', width: width, zIndex: (level - 50) * -1, top: (level * 50) + 'px', position: (childs.length > 0) ? 'sticky' : 'static' }"
+         :style="{marginLeft: padding+'px', width: width, zIndex: (level - 50) * -1, top: (level * 50) + 'px', position: 'sticky'}"
          :class="{sticky: (sticky && parentSticky), reply: postType === 'reply'}"
     >
       <template v-if="postType === 'question'">
@@ -16,13 +16,13 @@
       </template>
     </div>
     <div class="body" :style="{paddingLeft: ((level + 1) * 5) + 'px'}">
-     HEYYY Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut autem consequuntur dolor eos eum exercitationem, facilis illum ipsum laudantium magnam maxime minus nesciunt omnis pariatur quae quod rerum suscipit veniam.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut autem consequuntur dolor eos eum exercitationem, facilis illum ipsum laudantium magnam maxime minus nesciunt omnis pariatur quae quod rerum suscipit veniam.
     </div>
 <!--    <div class="shadow">-->
 <!--      <slot></slot>-->
 <!--    </div>-->
     <div class="childs">
-      <MessageComponent
+      <MessageFixedHeadersComponent
           v-for="m in childs"
           :parentSticky="sticky"
           :key="m.key"
@@ -35,14 +35,14 @@
           :author="m.author"
       >
         {{m.message}}
-      </MessageComponent>
+      </MessageFixedHeadersComponent>
     </div>
   </div>
 </template>
 <script>
 
 export default {
-  name: "MessageComponent",
+  name: "MessageFixedHeadersComponent",
   props: {
     level: {
       type: Number,
@@ -92,7 +92,7 @@ export default {
   mounted() {
     window.setInterval(() => {
       if(this.$refs.title) {
-        this.sticky = !!(this.isInViewport(this.$refs.title) && this.childs.length > 0);
+        this.sticky = !!(this.isInViewport(this.$refs.title));
       }
     }, 100);
   },
@@ -108,7 +108,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .message {
   width: 500px;
   max-width: 100%;
@@ -135,7 +135,7 @@ export default {
   box-sizing: border-box;
   padding: 10px;
   height: 50px;
-  background: rgba(230,230,230,1);
+  background: #cdcdcd;
   max-height: 1000px;
   text-align: left;
 }
@@ -181,7 +181,7 @@ export default {
 /*}*/
 
 .level-0 .title {
-  background: #e0e0e0;
+  background: #cdcdcd;
 }
 
 .level-1 .title {
@@ -212,6 +212,9 @@ export default {
   max-height: 50px;
 }
 .level-3 .title.sticky {
+  max-height: 50px;
+}
+.level-4 .title.sticky {
   max-height: 50px;
 }
 </style>

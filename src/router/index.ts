@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
+import Home2 from '../views/Home2.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,11 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/all-headers-fixed',
+    name: 'Home2',
+    component: Home2
   },
   {
     path: '/about',
@@ -21,7 +27,7 @@ const routes: Array<RouteConfig> = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })
