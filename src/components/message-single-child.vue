@@ -1,50 +1,49 @@
 <template>
   <div class="message" :class="['level-'+level]">
     <div class="title" ref="title"
-         :style="{marginLeft: padding+'px', width: width, zIndex: (level - 50) * -1, top: (level * 50) + 'px', position: 'sticky'}"
+         :style="{marginLeft: padding+'px', width: width, zIndex: (level - 50) * -1, top: (level * 50) + 'px', position: (childs.length > 0) ? 'sticky' : 'static' }"
          :class="{sticky: (sticky && parentSticky), reply: postType === 'reply'}"
     >
-      <template v-if="postType === 'question'">
-        <slot></slot>
-      </template>
-      <template v-else>
-        <div class="top">
-          <span class="date">11/14/22 20:42</span>
-          <span class="author">@{{ author }}:</span>
-        </div>
-        <div class="snippet">{{ title }}</div>
-      </template>
+      <div class="top">
+        <span class="date">11/14/22 20:42</span>
+        <span class="author">@{{ author }}:</span>
+      </div>
+      <div class="snippet">{{ title }}</div>
+      <div class="next" v-if="parentChilds > 1" @click="$emit('next')"><button>{{(childId + 1) +" / "+ parentChilds}} Next</button></div>
     </div>
     <div class="body" :style="{paddingLeft: ((level + 1) * 5) + 'px'}">
-      {{message}}
+     {{message}}
     </div>
 <!--    <div class="shadow">-->
 <!--      <slot></slot>-->
 <!--    </div>-->
     <div class="childs">
-      <MessageFixedHeadersComponent
-          v-for="m in childs"
+      <ReedMessageComponent
+          v-if="activeChild"
           :parentSticky="sticky"
-          :key="m.key"
-          :id="'m-'+m.key"
-          :level="m.level"
-          :parent="m.parent"
-          :childs="m.childs"
+          :key="activeChild.key"
+          :id="'m-'+activeChild.key"
+          :level="activeChild.level"
+          :parent="activeChild.parent"
+          :parent-childs="childs.length"
+          :child-id="childShown"
+          :childs="activeChild.childs"
           :class="{messageList: true}"
-          :post-type="m.postType"
-          :author="m.author"
-          :message="m.message"
-          :title="m.title"
+          :post-type="activeChild.postType"
+          :author="activeChild.author"
+          :title="activeChild.title"
+          :message="activeChild.message"
+          @next="next()"
       >
-        {{m.title}}
-      </MessageFixedHeadersComponent>
+        {{activeChild.title}}
+      </ReedMessageComponent>
     </div>
   </div>
 </template>
 <script>
 
 export default {
-  name: "MessageFixedHeadersComponent",
+  name: "ReedMessageComponent",
   props: {
     level: {
       type: Number,
@@ -77,14 +76,26 @@ export default {
     title: {
       type: String,
       default: ""
+    },
+    parentChilds: {
+      type: Number,
+      default: 0
+    },
+    childId: {
+      type: Number,
+      default: 0
     }
   },
   data() {
     return {
      sticky: false,
+      childShown: 0,
     }
   },
   computed: {
+    activeChild() {
+      return this.childs[this.childShown] || null
+    },
     width() {
       return "calc(100% - "+this.padding+"px)";
     },
@@ -102,11 +113,14 @@ export default {
   mounted() {
     window.setInterval(() => {
       if(this.$refs.title) {
-        this.sticky = !!(this.isInViewport(this.$refs.title));
+        this.sticky = !!(this.isInViewport(this.$refs.title) && this.childs.length > 0);
       }
     }, 100);
   },
   methods: {
+    next() {
+      this.childShown = (this.childShown + 1 < this.childs.length) ? this.childShown + 1 : 0
+    },
     isInViewport(element) {
       const rect = element.getBoundingClientRect();
       const scrollY = window.scrollY
@@ -118,7 +132,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .message {
   width: 500px;
   max-width: 100%;
@@ -137,7 +151,6 @@ export default {
   text-align: left;
   padding: 10px;
   position: relative;
-  white-space: pre-line;
 }
 .message * {
   transition:  all .2s;
@@ -146,16 +159,25 @@ export default {
   box-sizing: border-box;
   padding: 10px;
   height: 50px;
-  background: #cdcdcd;
+  background: rgba(230,230,230,1);
+  max-height: 1000px;
   text-align: left;
-  font-size: 14px;
-}
-.reply.title {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   border-left: 1px solid transparent;
+  font-size: 12px;
+}
+
+.message .title .top {
+  flex-basis: 84px;
+  flex-shrink: 0;
+}
+
+.message .title .next {
+  flex-basis: 80px;
+  flex-shrink: 0;
 }
 
 .reply.title .snippet {
@@ -192,26 +214,28 @@ export default {
 /*}*/
 
 .level-0 .title {
-  background: #000;
+  background: #e0e0e0;
 }
 
 .level-1 .title {
-  background: #333;
+  background: #cdcdcd;
 }
 
 .level-2 .title {
-  background: #666;
+  background: #a5a5a5;
+}
+
+.level-3 .title, .level-2 .title {
+  background: #888;
+  color: #fff;
 }
 
 .level-3 .title {
-  background: #333;
+  background: #666;
 }
 
-.level-0 .title,.level-1 .title, .level-2 .title {
+.level-3 .title .date, .level-2 .title .date {
   color: #fff;
-}
-.level-0 .title .date, .level-1 .title .date {
-  color: #fff !important;
 }
 
 .level-1 .title.sticky {
@@ -221,9 +245,6 @@ export default {
   max-height: 50px;
 }
 .level-3 .title.sticky {
-  max-height: 50px;
-}
-.level-4 .title.sticky {
   max-height: 50px;
 }
 </style>

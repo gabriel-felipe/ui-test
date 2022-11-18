@@ -2,7 +2,7 @@
   <div class="home">
     <div class="messages-holder">
       <div class="messages">
-        <MessageFixedComponent
+        <ReedMessageComponent
             v-for="m in messages"
             :key="m.key"
             :id="'m-'+m.key"
@@ -16,7 +16,7 @@
             :title="m.title"
         >
           {{m.title}}
-        </MessageFixedComponent>
+        </ReedMessageComponent>
       </div>
     </div>
   </div>
@@ -24,13 +24,12 @@
 
 <script>
 import { Component, Vue } from 'vue-property-decorator';
-import MessageFixedComponent from '@/components/message-all-headers-fixed.vue'; // @ is an alias to /src
-import messages from '../../scripts/reddit-json.js'
-
+import ReedMessageComponent from '@/components/message-single-child.vue'; // @ is an alias to /src
+import messages from '../../scripts/reddit-json'
 
 @Component({
   components: {
-    MessageFixedComponent,
+    ReedMessageComponent,
   },
   data: () => ({
     messages: messages,
