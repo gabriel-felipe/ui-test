@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Home2 from '../views/Home2.vue'
 import Home3 from '../views/Home3.vue'
 import Home4 from '../views/Home4.vue'
+import Home5 from '../views/Home5.vue'
 import ReedSingleChild from '../views/ReedSingleChild.vue'
 
 Vue.use(VueRouter)
@@ -28,6 +29,11 @@ const routes: Array<RouteConfig> = [
     path: '/example-4',
     name: 'Home4',
     component: Home4
+  },
+  {
+    path: '/example-5',
+    name: 'Home5',
+    component: Home5
   },
   {
     path: '/reed-single-child',
