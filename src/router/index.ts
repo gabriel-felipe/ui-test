@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import Home2 from '../views/Home2.vue'
+import Home3 from '../views/Home3.vue'
+import Home4 from '../views/Home4.vue'
 import ReedSingleChild from '../views/ReedSingleChild.vue'
 
 Vue.use(VueRouter)
@@ -16,6 +18,16 @@ const routes: Array<RouteConfig> = [
     path: '/all-headers-fixed',
     name: 'Home2',
     component: Home2
+  },
+  {
+    path: '/all-headers-fixed-compact',
+    name: 'Home3',
+    component: Home3
+  },
+  {
+    path: '/example-4',
+    name: 'Home4',
+    component: Home4
   },
   {
     path: '/reed-single-child',

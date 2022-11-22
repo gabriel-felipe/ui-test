@@ -1,7 +1,8 @@
 <template>
-  <div class="message" :class="['level-'+level]">
+  <div class="message" :class="['level-'+level]" >
     <div class="title" ref="title"
-         :style="{marginLeft: padding+'px', width: width, zIndex: (level - 50) * -1, top: (topLimit + 1) + 'px', position: 'sticky'}"
+         @click="scrollToBody"
+         :style="{marginLeft: padding+'px', width: width, zIndex: zIndex, top: (topLimit + 1) + 'px', position: 'sticky'}"
          :class="{sticky: (sticky && parentSticky), reply: postType === 'reply'}"
     >
       <template v-if="postType === 'question'">
@@ -15,7 +16,7 @@
         <div class="snippet">{{ title }}</div>
       </template>
     </div>
-    <div class="body" :style="{paddingLeft: ((level + 1) * 5) + 'px'}">
+    <div class="body" :style="{paddingLeft: ((level + 1) * 5) + 'px'}" ref="messageBody">
       {{message}}
     </div>
 <!--    <div class="shadow">-->
@@ -35,6 +36,9 @@
           :author="m.author"
           :message="m.message"
           :title="m.title"
+          :m-key="m.key"
+          @sticky="addStickyChild"
+          @unsticky="removeStickyChild"
       >
         {{m.title}}
       </MessageFixedHeadersComponent>
@@ -77,11 +81,26 @@ export default {
     title: {
       type: String,
       default: ""
+    },
+    mKey: {
+      type: String,
+      default: ""
     }
   },
   data() {
     return {
-     sticky: false,
+      sticky: false,
+      scrolledBy: false,
+      childsStuck: [],
+    }
+  },
+  watch: {
+    sticky() {
+      if(this.sticky) {
+        this.$emit('sticky', this.mKey)
+      } else {
+        this.$emit('unsticky', this.mKey)
+      }
     }
   },
   computed: {
@@ -91,12 +110,23 @@ export default {
     padding() {
       return this.level * 5
     },
+    zIndex() {
+      if(this.scrolledBy) {
+        return 0
+      }
+      if(
+          (this.sticky && this.childsStuck.length === this.childs.length)
+      ) {
+        return 1
+      }
+      return this.level > 3 ? 5 : (this.level + 2);
+    },
     topLimit() {
       let limit = this.level * 50
       if(this.level >= 1) {
         limit = limit - 1
       }
-      return limit
+      return (limit >= 99) ? 99 : limit;
     }
   },
   mounted() {
@@ -107,9 +137,23 @@ export default {
     }, 100);
   },
   methods: {
+    scrollToBody() {
+      const y = this.$refs.messageBody.getBoundingClientRect().top + window.scrollY - (this.topLimit + 50);
+      window.scroll({
+        top: y,
+        behavior: 'smooth'
+      });
+    },
+    addStickyChild(child) {
+      this.childsStuck.push(child)
+    },
+    removeStickyChild(child) {
+      this.childsStuck = this.childsStuck.filter(n => n !== child)
+    },
     isInViewport(element) {
       const rect = element.getBoundingClientRect();
       const scrollY = window.scrollY
+      this.scrolledBy = rect.top <= this.topLimit - 10  && scrollY > 10
       return (
           rect.top <= this.topLimit + 10  && scrollY > 10
       );
@@ -138,6 +182,7 @@ export default {
   padding: 10px;
   position: relative;
   white-space: pre-line;
+  z-index: -1;
 }
 .message * {
   transition:  all .2s;
