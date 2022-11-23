@@ -1,8 +1,11 @@
 <template>
   <div class="message" :class="['level-'+level]" >
+    <div class="expand" @click.prevent.stop="expand(!expanded)" :class="{visible: level === 2 && !scrolledBy && sticky}">
+      <span>⇿</span>
+    </div>
     <div class="title" ref="title"
          @click="scrollToBody"
-         :style="{marginLeft: padding+'px', width: width, zIndex: zIndex, top: (topLimit + 1) + 'px', position: 'sticky'}"
+         :style="{marginLeft: padding+'px', width: width, zIndex: zIndex, top: (topLimit + 1) + 'px', position: 'sticky', transform: 'translateY('+topTranslate+'px)'}"
          :class="{sticky: (sticky && parentSticky), reply: postType === 'reply'}"
     >
       <template v-if="postType === 'question'">
@@ -16,7 +19,7 @@
         <div class="snippet">{{ title }}</div>
       </template>
     </div>
-    <div class="body" :style="{paddingLeft: ((level + 1) * 5) + 'px'}" ref="messageBody">
+    <div class="body" :style="{paddingLeft: (padding + 5) + 'px'}" ref="messageBody">
       {{message}}
     </div>
 <!--    <div class="shadow">-->
@@ -37,6 +40,7 @@
           :message="m.message"
           :title="m.title"
           :m-key="m.key"
+          :parent-scrolled-by="scrolledBy && parentScrolledBy"
           @sticky="addStickyChild"
           @unsticky="removeStickyChild"
       >
@@ -85,7 +89,7 @@ export default {
     mKey: {
       type: String,
       default: ""
-    }
+    },
   },
   data() {
     return {
@@ -104,35 +108,58 @@ export default {
     }
   },
   computed: {
+    expanded() {
+      return this.$store.state.expanded
+    },
     width() {
       return "calc(100% - "+this.padding+"px)";
     },
     padding() {
-      return this.level * 5
+      if(this.level === 0) return 0
+      return this.level * 5 + 10
     },
     zIndex() {
       if(this.postType === "question") {
         return 99
       }
+      if(this.expanded && this.sticky && !this.scrolledBy) {
+        return this.level + 99;
+      }
       return this.level > 2 ? 4 : (this.level + 2);
     },
     topLimit() {
       let limit = this.level * 50
-      if(this.level >= 1) {
-        limit = limit - 1
-      }
       return (limit >= 50) ? 50 : limit;
+    },
+    topTranslate() {
+      if(!this.expanded || this.level <= 1 || !this.sticky) {
+        return 0;
+      }
+      let top = (this.level - 1) * 50
+      if(this.level >= 1) {
+        top = top - 1
+      }
+      return top;
     }
   },
   mounted() {
+    window.addEventListener('scroll', () => {this.expand(false)})
     window.setInterval(() => {
+      if(this.expanded) return
       if(this.$refs.title) {
         this.sticky = !!(this.isInViewport(this.$refs.title));
       }
     }, 100);
   },
   methods: {
+    expand(expand) {
+      this.$store.commit('setExpanded', expand)
+    },
     scrollToBody() {
+      if(this.sticky && !this.expanded) {
+        this.expand(true)
+        return
+      }
       const y = this.$refs.messageBody.getBoundingClientRect().top + window.scrollY - (this.topLimit + 50);
       window.scroll({
         top: y,
@@ -167,7 +194,8 @@ export default {
 .date {
   display: block;
   font-size: 10px;
-  color: #333;
+  color: inherit;
+  text-shadow: inherit;
 }
 .author {
   font-size: 12px;
@@ -219,6 +247,34 @@ export default {
   max-height: 50px;
 }
 
+.expand {
+  position: fixed;
+  top: 50px;
+  height: 50px;
+  width: 15px;
+  left: 0px;
+  font-size: 24px;
+  color: #000;
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  transition:  all .5s;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 0px;
+}
+
+.expand span {
+  transform: rotate(90deg);
+  transform-origin: center;
+  display: block;
+}
+
+.expand.visible {
+  opacity: 1;
+  visibility: visible;
+}
 /*.title.sticky:before {*/
 /*  content: "";*/
 /*  display: block;*/
@@ -230,6 +286,11 @@ export default {
 /*  top: 0;*/
 /*  z-index: -2;*/
 /*}*/
+
+.title {
+  color: #fff !important;
+  text-shadow: 0 0 20px #000 !important;
+}
 
 .level-0 .title {
   background: #000;
@@ -257,13 +318,24 @@ export default {
 
 .level-6 .title {
   background: #ccc;
+  color: #000 !important;
+  text-shadow: 0 0 20px #fff !important;
 }
 
-.level-0 .title,.level-1 .title, .level-2 .title {
-  color: #fff;
+.level-6 .title .date {
+  color: #000 !important;
 }
-.level-0 .title .date, .level-1 .title .date {
-  color: #fff !important;
+
+.level-7 .title {
+  background: #ddd;
+}
+
+.level-7 .title.sticky {
+  border-left: 1px solid #ddd
+}
+
+.level-8 .title {
+  background: #eee;
 }
 
 .level-1 .title.sticky {

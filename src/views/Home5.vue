@@ -27,13 +27,38 @@
 import { Component, Vue } from 'vue-property-decorator';
 import MessageFixedComponent from '@/components/message-final-2.vue'; // @ is an alias to /src
 import messages from '../../scripts/reddit-linear-json.js'
+let allMessages = JSON.parse(JSON.stringify(messages));
+allMessages[0].childs[0].childs[0].childs[0].childs[0].childs[0].childs = JSON.parse(JSON.stringify(messages));
+function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
+const fixDepthAndKey = (messages, depth, parent) => {
+  messages.map(m => {
+    let key = uuidv4()
+    m.key = key
+    m.level = depth
+    m.parent = parent
+    if(depth > 0) {
+      m.postType = 'reply'
+    } else {
+      m.postType = 'question'
+    }
+    m.childs = fixDepthAndKey(m.childs || [], depth+1, key)
+    return m
+  })
+  return messages
+}
+
+allMessages = fixDepthAndKey(allMessages, 0, "")
 
 @Component({
   components: {
     MessageFixedComponent,
   },
   data: () => ({
-    messages: messages,
+    messages: allMessages,
     firstMessage: "",
     firstMessageContent: '',
     scrolling: false
