@@ -7,9 +7,40 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    expanded: false
+    expanded: false,
+    stickyCount: 0,
+    lastStuck: null as string | null,
   },
   mutations: {
+    lastStuck(state, key) {
+      state.lastStuck = key
+    },
+    sticky(state, key) {
+      state.stickyCount += 1
+      window.setTimeout(() => {
+        const last = Array.from(
+            document.querySelectorAll('.sticky')
+        ).pop();
+        if (last) {
+          state.lastStuck = last.getAttribute("data-key");
+        } else {
+          state.lastStuck = null
+        }
+      }, 50)
+    },
+    unsticky(state) {
+      state.stickyCount -= 1
+      window.setTimeout(() => {
+        const last = Array.from(
+            document.querySelectorAll('.sticky')
+        ).pop();
+        if (last) {
+          state.lastStuck = last.getAttribute("data-key");
+        } else {
+          state.lastStuck = null
+        }
+      }, 50)
+    },
     setExpanded(state, expanded) {
       state.expanded = expanded
     }

@@ -82,6 +82,9 @@ allMessages = fixDepthAndKey(allMessages, 0, "")
     //   return this.fixedClasses[0]
     // }
   },
+  mounted() {
+    window.addEventListener('scroll', () => {this.$store.commit('setExpanded', false) })
+  },
   methods: {
     // isInViewport(element) {
     //   const rect = element.getBoundingClientRect();
@@ -110,6 +113,14 @@ allMessages = fixDepthAndKey(allMessages, 0, "")
 export default class Home extends Vue {}
 </script>
 <style>
+.infoFixed {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  width: 300px;
+  background: #ddd;
+  padding: 15px;
+}
 .messages-holder {
   width: 100%;
   display: flex;

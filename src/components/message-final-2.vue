@@ -5,6 +5,7 @@
     </div>
     <div class="title" ref="title"
          @click="scrollToBody"
+         :data-key="mKey"
          :style="{marginLeft: padding+'px', width: width, zIndex: zIndex, top: (topLimit + 1) + 'px', position: 'sticky', transform: 'translateY('+topTranslate+'px)'}"
          :class="{sticky: (sticky && parentSticky), reply: postType === 'reply'}"
     >
@@ -16,10 +17,11 @@
           <span class="date">11/14/22 20:42</span>
           <span class="author">@{{ author }}:</span>
         </div>
-        <div class="snippet">{{ title }}</div>
+<!--        <div class="snippet">{{ title }}</div>-->
+        <div class="snippet">{{ mKey }}</div>
       </template>
     </div>
-    <div class="body" :style="{paddingLeft: (padding + 5) + 'px'}" ref="messageBody">
+    <div class="body" :style="{paddingLeft: (padding + 5) + 'px', marginTop: (expandedTranslateY+'px')}" ref="messageBody">
       {{message}}
     </div>
 <!--    <div class="shadow">-->
@@ -40,7 +42,6 @@
           :message="m.message"
           :title="m.title"
           :m-key="m.key"
-          :parent-scrolled-by="scrolledBy && parentScrolledBy"
           @sticky="addStickyChild"
           @unsticky="removeStickyChild"
       >
@@ -101,15 +102,34 @@ export default {
   watch: {
     sticky() {
       if(this.sticky) {
-        this.$emit('sticky', this.mKey)
+        this.$emit('sticky', {key: this.mKey, level: this.level})
       } else {
-        this.$emit('unsticky', this.mKey)
+        this.$emit('unsticky', {key: this.mKey, level: this.level})
       }
-    }
+    },
+    currentlyStuck() {
+      if(this.currentlyStuck) {
+        this.$store.commit('sticky', this.mKey)
+      } else {
+        this.$store.commit('unsticky', this.mKey)
+      }
+    },
   },
   computed: {
     expanded() {
       return this.$store.state.expanded
+    },
+    lastStuck() {
+      return this.$store.state.lastStuck
+    },
+    expandedTranslateY() {
+      return (this.expanded && this.stickyCount > 2 && this.mKey === this.lastStuck) ? (this.stickyCount - 2) * 50 : 0;
+    },
+    currentlyStuck() {
+      return this.sticky && !this.scrolledBy
+    },
+    stickyCount() {
+      return this.$store.state.stickyCount
     },
     width() {
       return "calc(100% - "+this.padding+"px)";
@@ -132,7 +152,7 @@ export default {
       return (limit >= 50) ? 50 : limit;
     },
     topTranslate() {
-      if(!this.expanded || this.level <= 1 || !this.sticky) {
+      if(!this.expanded || this.level <= 1 || !this.sticky || this.scrolledBy) {
         return 0;
       }
       let top = (this.level - 1) * 50
@@ -143,17 +163,17 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('scroll', () => {this.expand(false)})
     window.setInterval(() => {
       if(this.expanded) return
       if(this.$refs.title) {
         this.sticky = !!(this.isInViewport(this.$refs.title));
       }
-    }, 100);
+    }, 200);
   },
   methods: {
-    expand(expand) {
-      this.$store.commit('setExpanded', expand)
+    async expand(expand) {
+      await this.$store.commit('setExpanded', expand)
+
     },
     scrollToBody() {
       if(this.sticky && !this.expanded) {
@@ -165,6 +185,9 @@ export default {
         top: y,
         behavior: 'smooth'
       });
+      window.setTimeout(() => {
+        this.$store.commit('lastStuck', this.mKey)
+      }, 100)
     },
     addStickyChild(child) {
       this.childsStuck.push(child)
