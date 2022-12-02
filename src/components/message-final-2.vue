@@ -17,8 +17,8 @@
           <span class="date">11/14/22 20:42</span>
           <span class="author">@{{ author }}:</span>
         </div>
-<!--        <div class="snippet">{{ title }}</div>-->
-        <div class="snippet">{{ mKey }}</div>
+        <div class="snippet">{{ title }}</div>
+<!--        <div class="snippet">{{ mKey }}</div>-->
       </template>
     </div>
     <div class="body" :style="{paddingLeft: (padding + 5) + 'px', marginTop: (expandedTranslateY+'px')}" ref="messageBody">
