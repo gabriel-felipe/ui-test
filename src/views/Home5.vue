@@ -15,6 +15,7 @@
             :message="m.message"
             :title="m.title"
             :m-key="m.key"
+            :timestamp="m.timestamp"
         >
           {{m.title}}
         </MessageFixedComponent>
@@ -26,9 +27,8 @@
 <script>
 import { Component, Vue } from 'vue-property-decorator';
 import MessageFixedComponent from '@/components/message-final-2.vue'; // @ is an alias to /src
-import messages from '../../scripts/reddit-linear-json.js'
+import messages from '../../scripts/roboto-json.js'
 let allMessages = JSON.parse(JSON.stringify(messages));
-allMessages[0].childs[0].childs[0].childs[0].childs[0].childs[0].childs = JSON.parse(JSON.stringify(messages));
 function uuidv4() {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
       (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
@@ -44,6 +44,9 @@ const fixDepthAndKey = (messages, depth, parent) => {
       m.postType = 'reply'
     } else {
       m.postType = 'question'
+    }
+    if(!m.title) {
+      m.title = m.message.substring(0,90)+"...";
     }
     m.childs = fixDepthAndKey(m.childs || [], depth+1, key)
     return m

@@ -14,7 +14,7 @@
       </template>
       <template v-else>
         <div class="top">
-          <span class="date">11/14/22 20:42</span>
+          <span class="date">{{timestamp || "11/14/22 20:42"}}</span>
           <span class="author">@{{ author }}:</span>
         </div>
         <div class="snippet">{{ title }}</div>
@@ -42,6 +42,7 @@
           :message="m.message"
           :title="m.title"
           :m-key="m.key"
+          :timestamp="m.timestamp"
           @sticky="addStickyChild"
           @unsticky="removeStickyChild"
       >
@@ -91,6 +92,10 @@ export default {
       type: String,
       default: ""
     },
+    timestamp: {
+      type: String,
+      default: ""
+    }
   },
   data() {
     return {
@@ -253,6 +258,7 @@ export default {
   opacity: 0;
   visibility: hidden;
   font-size: 12px;
+  margin-left: 20px;
 }
 
 .reply.title.sticky .snippet {
