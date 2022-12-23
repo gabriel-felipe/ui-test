@@ -5,6 +5,7 @@ import Home2 from '../views/Home2.vue'
 import Home3 from '../views/Home3.vue'
 import Home4 from '../views/Home4.vue'
 import Home5 from '../views/Home5.vue'
+import Home6 from '../views/Home6.vue'
 import ReedSingleChild from '../views/ReedSingleChild.vue'
 
 Vue.use(VueRouter)
@@ -24,6 +25,11 @@ const routes: Array<RouteConfig> = [
     path: '/all-headers-fixed-compact',
     name: 'Home3',
     component: Home3
+  },
+  {
+    path: '/example-6',
+    name: 'Home6',
+    component: Home6
   },
   {
     path: '/example-4',
