@@ -1,7 +1,7 @@
 <template>
   <div class="message" :class="['level-'+level]">
     <div class="title" ref="title"
-         :style="{width: width, zIndex: (level - 50) * -1, top: (topLimit + 1) + 'px', position: 'sticky' }"
+         :style="{zIndex: (level - 50) * -1, top: (topLimit + 1) + 'px', position: 'sticky' }"
          :class="{sticky: (sticky && parentSticky), reply: postType === 'reply', question: postType === 'question'}"
     >
       <template v-if="postType === 'question'">
@@ -14,9 +14,13 @@
       <template v-else>
         <div class="top">
           <span class="author">@{{ author }}:</span>
-          <span class="date">11/14/22 20:42</span>
+          <div class="snippet">{{ title }}</div>
         </div>
-        <div class="snippet">{{ title }}</div>
+        <div class="right">
+          <span class="date">11/14/22 20:42</span>
+          <button>.....</button>
+        </div>
+
       </template>
     </div>
     <div class="title bigtitle question" ref="bigtitle" v-if="postType === 'question'">
@@ -123,10 +127,10 @@ export default {
       return this.level * 5
     },
     topLimit() {
-      let limit = this.level * 50
+      let limit = this.level * 40
       if(this.level >= 1) {
         limit = limit - 1
-        limit += 20
+        limit += 30
       }
       return limit
     },
@@ -176,7 +180,6 @@ export default {
 .author {
   font-weight: 500;
   font-size: 16px;
-  line-height: 22px;
   color: #575757;
 }
 .message .body {
@@ -228,7 +231,6 @@ export default {
 .message .title {
   box-sizing: border-box;
   padding: 10px;
-  height: 50px;
   background: #fff;
   border-bottom: 1px solid #ddd;
   color: #333 !important;
@@ -241,13 +243,45 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 50px;
+  transition: all .3s;
   border-left: 1px solid transparent;
+  .top {
+    display: flex;
+    align-items: center;
+    flex-basis: auto;
+  }
+  .right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    button {
+      font-size: 10px;
+      background: #fff;
+      border: 1px solid #DADADA;
+      height: 24px;
+      border-radius: 2px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 1em;
+      margin-left: 5px;
+      color: #000;
+      padding-bottom: 5px;
+      cursor: pointer;
+      visibility: hidden;
+      width: 0;
+    }
+  }
 }
 
 .reply.title .snippet {
   opacity: 0;
   visibility: hidden;
-  font-size: 14px;
+  font-size: 12px;
+  margin-left: 5px;
 }
 
 .reply.title.sticky .snippet {
@@ -262,8 +296,16 @@ export default {
 }
 
 .reply.title.sticky {
-  max-height: 50px;
+  max-height: 40px;
+  height: 40px;
   border-left: #000 2px solid !important;
+  .author {
+    font-size: 12px;
+  }
+  button {
+    width: 24px;
+    visibility: visible;
+  }
 }
 
 .childs {
@@ -324,6 +366,7 @@ export default {
   span {
 
   }
+
 }
 
 /*.title.sticky:before {*/
@@ -339,15 +382,15 @@ export default {
 /*}*/
 
 .level-1 .title.sticky {
-  max-height: 50px;
+  max-height: 40px;
 }
 .level-2 .title.sticky {
-  max-height: 50px;
+  max-height: 40px;
 }
 .level-3 .title.sticky {
-  max-height: 50px;
+  max-height: 40px;
 }
 .level-4 .title.sticky {
-  max-height: 50px;
+  max-height: 40px;
 }
 </style>
