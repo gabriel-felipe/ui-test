@@ -328,7 +328,6 @@ export default {
   font-size: 30px;
   position: relative;
   top: 0;
-  margin-top: -70px;
   z-index: 999 !important;
   flex-direction: column;
   img {
@@ -338,7 +337,7 @@ export default {
 .message .question.title {
   font-style: normal;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 135%;
   height: auto;
   padding-left: 0;
@@ -348,6 +347,13 @@ export default {
   transition: font-size .1s, height .3s;
   align-items: flex-start;
 
+  &:not(.bigtitle) {
+    height: 0;
+    padding: 0;
+    &.sticky {
+      padding: 10px;
+    }
+  }
   img {
     margin-right: 20px;
   }
@@ -362,7 +368,6 @@ export default {
   top: 0;
   z-index: 999 !important;
   height: 70px !important;
-  font-size: 18px;
   span {
 
   }
