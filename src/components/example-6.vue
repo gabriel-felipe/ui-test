@@ -1,6 +1,7 @@
 <template>
   <div class="message" :class="['level-'+level]">
     <div class="title" ref="title"
+         @click="scrollToBody"
          :style="{zIndex: (level - 50) * -1, top: (topLimit + 1) + 'px', position: 'sticky' }"
          :class="{sticky: (sticky && parentSticky), reply: postType === 'reply', question: postType === 'question'}"
     >
@@ -30,7 +31,11 @@
         <slot></slot>
       </span>
     </div>
-    <div class="body" :class="{sticky: (sticky && parentSticky), reply: postType === 'reply', question: postType === 'question'}" :style="{paddingLeft: '10px'}">
+    <div
+        ref="messageBody"
+        class="body"
+        :class="{sticky: (sticky && parentSticky), reply: postType === 'reply', question: postType === 'question'}" :style="{paddingLeft: '10px'}"
+    >
       {{message}}
 
       <div class="actions">
@@ -150,6 +155,13 @@ export default {
     }, 100);
   },
   methods: {
+    scrollToBody() {
+      const y = this.$refs.messageBody.getBoundingClientRect().top + window.scrollY - (this.topLimit + 50);
+      window.scroll({
+        top: y,
+        behavior: 'smooth'
+      });
+    },
     isInViewport(element) {
       const rect = element.getBoundingClientRect();
       const scrollY = window.scrollY
@@ -167,7 +179,7 @@ export default {
 <style scoped lang="scss">
 .message {
   width: 500px;
-  max-width: 100%;
+  max-width: calc(100% - 20px);
   position: relative;
 }
 
@@ -328,7 +340,7 @@ export default {
   font-size: 30px;
   position: relative;
   top: 0;
-  z-index: 999 !important;
+  z-index: 1000 !important;
   flex-direction: column;
   img {
     margin-bottom: 20px;
@@ -348,8 +360,12 @@ export default {
   align-items: flex-start;
 
   &:not(.bigtitle) {
-    height: 0;
-    padding: 0;
+    height: 70px;
+    position: fixed !important;
+    width: 480px;
+    max-width: calc(100vw - 20px);
+    top: 0;
+    z-index: 999 !important;
     &.sticky {
       padding: 10px;
     }
@@ -362,16 +378,6 @@ export default {
     transition: all .3s;
     transform-origin: 0 0;
   }
-}
-
-.question.title.sticky {
-  top: 0;
-  z-index: 999 !important;
-  height: 70px !important;
-  span {
-
-  }
-
 }
 
 /*.title.sticky:before {*/
