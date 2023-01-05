@@ -133,10 +133,10 @@ export default {
       return this.level * 5
     },
     topLimit() {
-      let limit = this.level * 50
+      let limit = this.level * 40
       if(this.level >= 1) {
         limit = limit - 1
-        limit += 20
+        limit += 30
       }
       return limit
     },
@@ -158,9 +158,6 @@ export default {
   methods: {
     scrollToBody() {
       const body = document.getElementsByTagName("body")[0];
-      console.log(body.scrollTop)
-      console.log(this.$refs.messageBody.getBoundingClientRect().top)
-      console.log(this.topLimit + 50)
       const y = this.$refs.messageBody.getBoundingClientRect().top + body.scrollTop - (this.topLimit + 50);
       console.log(y)
       body.scroll({
@@ -170,12 +167,13 @@ export default {
     },
     isInViewport(element) {
       const rect = element.getBoundingClientRect();
-      const scrollY = window.scrollY
+      const body = document.getElementsByTagName("body")[0];
+      const scrollY = body.scrollTop
       if(this.postType === "question") {
         return scrollY > 10
       }
       return (
-          rect.top <= this.topLimit + 10  && scrollY > 10
+          rect.top <= this.topLimit + 10 && scrollY > 10
       );
     },
   }
@@ -299,6 +297,10 @@ export default {
   visibility: hidden;
   font-size: 12px;
   margin-left: 5px;
+  @media(max-width: 500px) {
+    max-width: 160px;
+    font-size: 10px;
+  }
 }
 
 .reply.title.sticky .snippet {
