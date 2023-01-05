@@ -1,9 +1,10 @@
 <template>
   <div class="message" :class="['level-'+level]">
     <div class="title" ref="title"
-         @click="scrollToBody"
          :style="{zIndex: (level - 50) * -1, top: (topLimit + 1) + 'px', position:  postType === 'question' ? 'fixed' : 'sticky' }"
          :class="{sticky: (sticky && parentSticky), reply: postType === 'reply', question: postType === 'question'}"
+         @click="scrollToBody()"
+
     >
       <template v-if="postType === 'question'">
         <img src="@/assets/forum-logo.png" alt="">
@@ -132,10 +133,10 @@ export default {
       return this.level * 5
     },
     topLimit() {
-      let limit = this.level * 40
+      let limit = this.level * 50
       if(this.level >= 1) {
         limit = limit - 1
-        limit += 30
+        limit += 20
       }
       return limit
     },
@@ -156,8 +157,13 @@ export default {
   },
   methods: {
     scrollToBody() {
-      const y = this.$refs.messageBody.getBoundingClientRect().top + window.scrollY - (this.topLimit + 50);
-      window.scroll({
+      const body = document.getElementsByTagName("body")[0];
+      console.log(body.scrollTop)
+      console.log(this.$refs.messageBody.getBoundingClientRect().top)
+      console.log(this.topLimit + 50)
+      const y = this.$refs.messageBody.getBoundingClientRect().top + body.scrollTop - (this.topLimit + 50);
+      console.log(y)
+      body.scroll({
         top: y,
         behavior: 'smooth'
       });
@@ -179,7 +185,6 @@ export default {
 <style scoped lang="scss">
 .message {
   width: 500px;
-  max-width: calc(100% - 20px);
   position: relative;
 }
 
@@ -362,8 +367,8 @@ export default {
   &:not(.bigtitle) {
     height: 70px;
     position: fixed !important;
-    width: 480px;
-    max-width: calc(100vw - 20px);
+    width: 490px;
+    max-width: calc(100vw);
     top: 0 !important;
     z-index: 999 !important;
     &.sticky {
