@@ -8,6 +8,11 @@
 body, html {
   margin: 0;
   padding: 0;
+  position: fixed;
+  top: 0;
+  max-height: 100vh;
+  max-width: 100vw;
+  overflow: scroll;
 }
 
 #app {

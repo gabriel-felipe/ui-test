@@ -2,7 +2,7 @@
   <div class="message" :class="['level-'+level]">
     <div class="title" ref="title"
          @click="scrollToBody"
-         :style="{zIndex: (level - 50) * -1, top: (topLimit + 1) + 'px', position: 'sticky' }"
+         :style="{zIndex: (level - 50) * -1, top: (topLimit + 1) + 'px', position:  postType === 'question' ? 'fixed' : 'sticky' }"
          :class="{sticky: (sticky && parentSticky), reply: postType === 'reply', question: postType === 'question'}"
     >
       <template v-if="postType === 'question'">
@@ -364,7 +364,7 @@ export default {
     position: fixed !important;
     width: 480px;
     max-width: calc(100vw - 20px);
-    top: 0;
+    top: 0 !important;
     z-index: 999 !important;
     &.sticky {
       padding: 10px;
