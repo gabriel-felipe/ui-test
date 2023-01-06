@@ -13,8 +13,10 @@ body, html {
   padding: 0;
   position: fixed;
   top: 0;
-  max-height: 100vh;
-  max-width: 100vw;
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
   overflow: scroll;
 }
 

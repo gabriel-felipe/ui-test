@@ -27,35 +27,41 @@
 <script>
 import { Component, Vue } from 'vue-property-decorator';
 import MessageFixedComponent from '@/components/example-6.vue'; // @ is an alias to /src
-import messages from '../../scripts/reddit-compact-json.js'
+import messages from '../../scripts/103sqbf_converted-reddit.json'
 function uuidv4() {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
       (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
   );
 }
 const fixDepthAndKey = (messages, depth, parent) => {
-  messages.map(m => {
-    let key = uuidv4()
-    m.key = key
-    m.level = depth
-    m.parent = parent
-    if(depth > 0) {
-      m.postType = 'reply'
-    } else {
-      m.postType = 'question'
-    }
+  if(messages.map) {
+    console.log(messages)
+    messages = messages.map(m => {
+      let key = uuidv4()
+      m.key = key
+      m.level = depth
+      m.parent = parent
+      if(depth > 0) {
+        m.postType = 'reply'
+      } else {
+        m.postType = 'question'
+      }
 
-    if (depth === 2) {
-      m.expandedChilds = false
-    } else {
-      m.expandedChilds = true
-    }
-    if(!m.title) {
-      m.title = m.message.substring(0,90)+"...";
-    }
-    m.childs = fixDepthAndKey(m.childs || [], depth+1, key)
-    return m
-  })
+      if (depth === 2) {
+        m.expandedChilds = false
+      } else {
+        m.expandedChilds = true
+      }
+      if(!m.title && m.message) {
+        m.title = m.message.substring(0,90)+"...";
+      }
+      m.childs = fixDepthAndKey(m.childs || [], depth+1, key)
+      return m
+    })
+  } else {
+    return []
+  }
+
   return messages
 }
 

@@ -37,8 +37,7 @@
         class="body"
         :class="{sticky: (sticky && parentSticky), reply: postType === 'reply', question: postType === 'question'}" :style="{paddingLeft: '10px'}"
     >
-      {{message}}
-
+<div v-html="unescapeMessage"></div>
       <div class="actions">
         <div class="reply">
           Reply
@@ -126,6 +125,14 @@ export default {
     }
   },
   computed: {
+    unescapeMessage() {
+      const htmlDecode = (input) => {
+        const e = document.createElement('textarea');
+        e.innerHTML = input;
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+      }
+      return htmlDecode(this.message);
+    },
     width() {
       return "calc(100% - "+this.padding+"px)";
     },
@@ -173,7 +180,7 @@ export default {
         return scrollY > 10
       }
       return (
-          rect.top <= this.topLimit + 10 && scrollY > 10
+          rect.top <= this.topLimit + 40 && scrollY > 10
       );
     },
   }
@@ -191,6 +198,9 @@ export default {
   font-size: 12px;
   color: #8C8C8C !important;
   margin-top: 3px;
+  @media(max-width: 500px) {
+    font-size: 10px;
+  }
 }
 .author {
   font-weight: 500;
@@ -201,7 +211,6 @@ export default {
   text-align: left;
   padding: 10px;
   position: relative;
-  white-space: pre-line;
   font-weight: 500;
   font-size: 16px;
   line-height: 30px;
