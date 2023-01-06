@@ -280,6 +280,7 @@ export default {
   width: 100%;
   height: 50px;
   transition: all .3s;
+  cursor: pointer;
   border-left: 1px solid transparent;
   .top {
     width: calc(100% - 110px);
