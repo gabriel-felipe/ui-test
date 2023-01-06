@@ -17,10 +17,12 @@ export default new Vuex.Store({
     },
     sticky(state, key) {
       state.stickyCount += 1
+      state.lastStuck = key
       window.setTimeout(() => {
-        const last = Array.from(
-            document.querySelectorAll('.sticky')
-        ).pop();
+        const lasts = Array.from(
+            document.querySelectorAll('.title.sticky')
+        );
+        const last = lasts.pop();
         if (last) {
           state.lastStuck = last.getAttribute("data-key");
         } else {
@@ -32,7 +34,7 @@ export default new Vuex.Store({
       state.stickyCount -= 1
       window.setTimeout(() => {
         const last = Array.from(
-            document.querySelectorAll('.sticky')
+            document.querySelectorAll('.title.sticky')
         ).pop();
         if (last) {
           state.lastStuck = last.getAttribute("data-key");

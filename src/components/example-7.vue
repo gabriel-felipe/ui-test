@@ -1,8 +1,9 @@
 <template>
   <div class="message" :class="['level-'+level]">
     <div class="title" ref="title"
+         :data-key="all.key"
          :style="{zIndex: (level - 50) * -1, top: (topLimit + 1) + 'px', position:  postType === 'question' ? 'fixed' : 'sticky' }"
-         :class="{sticky: (sticky && parentSticky), reply: postType === 'reply', question: postType === 'question'}"
+         :class="{sticky: (sticky && parentSticky), reply: postType === 'reply', question: postType === 'question', lastStuck: lastStuck, showSnippet: showSnippet}"
          @click="scrollToBody()"
 
     >
@@ -38,7 +39,7 @@
         :class="{sticky: (sticky && parentSticky), reply: postType === 'reply', question: postType === 'question'}" :style="{paddingLeft: '10px'}"
     >
 <div v-html="unescapeMessage"></div>
-      <div class="actions">
+      <div class="actions" ref="actions">
         <div class="reply">
           Reply
         </div>
@@ -120,11 +121,19 @@ export default {
   },
   data() {
     return {
-     sticky: false,
-      openChilds: this.all.expandedChilds
+      sticky: false,
+      openChilds: this.all.expandedChilds,
+      scrolledBy: false,
+      showSnippet: false
     }
   },
   computed: {
+    lastStuck() {
+      return this.$store.state.lastStuck === this.all.key
+    },
+    currentlyStuck() {
+      return this.sticky && !this.scrolledBy
+    },
     unescapeMessage() {
       const htmlDecode = (input) => {
         const e = document.createElement('textarea');
@@ -160,13 +169,21 @@ export default {
       if(this.$refs.title) {
         this.sticky = !!(this.isInViewport(this.$refs.title));
       }
-    }, 100);
+    }, 200);
+  },
+  watch: {
+    currentlyStuck() {
+      if(this.currentlyStuck) {
+        this.$store.commit('sticky', this.mKey)
+      } else {
+        this.$store.commit('unsticky', this.mKey)
+      }
+    },
   },
   methods: {
     scrollToBody() {
       const body = document.getElementsByTagName("body")[0];
       const y = this.$refs.messageBody.getBoundingClientRect().top + body.scrollTop - (this.topLimit + 50);
-      console.log(y)
       body.scroll({
         top: y,
         behavior: 'smooth'
@@ -176,11 +193,10 @@ export default {
       const rect = element.getBoundingClientRect();
       const body = document.getElementsByTagName("body")[0];
       const scrollY = body.scrollTop
-      if(this.postType === "question") {
-        return scrollY > 10
-      }
+      this.showSnippet = (this.childs.length > 0) && (this.openChilds) && (rect.top + rect.height) > this.$refs.actions.getBoundingClientRect().top
+      this.scrolledBy = rect.width > 0 && rect.top <= this.topLimit - 10  && scrollY > 10
       return (
-          rect.top <= this.topLimit + 40 && scrollY > 10
+          rect.width > 0 && rect.top <= this.topLimit + 40 && scrollY > 10
       );
     },
   }
@@ -223,6 +239,8 @@ export default {
   font-size: 16px;
   line-height: 30px;
   padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
   ::v-deep a {
     word-break: break-all;
   }
@@ -267,7 +285,6 @@ export default {
   box-sizing: border-box;
   padding: 10px;
   background: #fff;
-  border-bottom: 1px solid #ddd;
   color: #333 !important;
   text-align: left;
   font-size: 14px;
@@ -320,17 +337,22 @@ export default {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  height: 0;
+  transition-delay: 250ms;
   @media(max-width: 500px) {
     font-size: 10px;
   }
 }
 
-.reply.title.sticky .snippet {
+
+.reply.title.sticky.showSnippet .snippet {
+  height: 1.2em;
   opacity: 1;
   visibility: visible;
+  display: block;
 }
 
-.title.sticky > p {
+.title.sticky.showSnippet > p {
   max-height: 0;
   opacity: 0;
   visibility: hidden;
@@ -340,9 +362,11 @@ export default {
   max-height: 40px;
   height: 40px;
   border-left: #000 2px solid !important;
-  padding: 5px 5px 5px 5px;
-  .author {
-    font-size: 12px;
+  &.showSnippet {
+    padding: 5px 5px 5px 5px;
+    .author {
+      font-size: 12px;
+    }
   }
   button {
     width: 18px;
@@ -382,7 +406,6 @@ export default {
   font-size: 16px;
   line-height: 135%;
   height: auto;
-  padding-left: 0;
   max-height: 1000px !important;
   position: relative;
   z-index: 99;
@@ -427,16 +450,16 @@ export default {
 /*  z-index: -2;*/
 /*}*/
 
-.level-1 .title.sticky {
+.level-1 .title.sticky.showSnippet {
   max-height: 40px;
 }
-.level-2 .title.sticky {
+.level-2 .title.sticky.showSnippet {
   max-height: 40px;
 }
-.level-3 .title.sticky {
+.level-3 .title.sticky.showSnippet {
   max-height: 40px;
 }
-.level-4 .title.sticky {
+.level-4 .title.sticky.showSnippet {
   max-height: 40px;
 }
 </style>

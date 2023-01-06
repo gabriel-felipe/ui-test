@@ -132,7 +132,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .message {
   width: 500px;
   max-width: 100%;
