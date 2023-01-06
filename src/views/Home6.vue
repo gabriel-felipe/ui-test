@@ -2,6 +2,9 @@
   <div class="home">
     <div class="messages-holder">
       <div class="messages">
+        <template v-if="loading">
+          loading...
+        </template>
         <MessageFixedComponent
             v-for="m in messages"
             :key="m.key"
@@ -26,8 +29,10 @@
 
 <script>
 import { Component, Vue } from 'vue-property-decorator';
-import MessageFixedComponent from '@/components/example-6.vue'; // @ is an alias to /src
-import messages from '../../scripts/103sqbf_converted-reddit.json'
+import MessageFixedComponent from '@/components/example-6.vue';
+import axios from 'axios';
+
+import fs from "fs"; // @ is an alias to /src
 function uuidv4() {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
       (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
@@ -47,13 +52,13 @@ const fixDepthAndKey = (messages, depth, parent) => {
         m.postType = 'question'
       }
 
-      if (depth === 2) {
+      if (depth === 3) {
         m.expandedChilds = false
       } else {
         m.expandedChilds = true
       }
       if(!m.title && m.message) {
-        m.title = m.message.substring(0,90)+"...";
+        m.title = m.message.substring(0,150)+"...";
       }
       m.childs = fixDepthAndKey(m.childs || [], depth+1, key)
       return m
@@ -65,17 +70,93 @@ const fixDepthAndKey = (messages, depth, parent) => {
   return messages
 }
 
-const allMessages = fixDepthAndKey(messages, 0, "")
 @Component({
   components: {
     MessageFixedComponent,
   },
+  props: {
+    thread: {
+      type: String,
+      default: "",
+    }
+  },
   data: () => ({
-    messages: allMessages,
+    messages: [],
     firstMessage: "",
     firstMessageContent: '',
-    scrolling: false
+    scrolling: false,
+    loading: false,
   }),
+  mounted() {
+    const questionUrl = "https://www.reddit.com/r/"+this.thread
+
+    if(this.thread) {
+      this.loading = true
+    }
+    async function getChildren(commentId, level) {
+      const commentUrl = questionUrl+"/"+commentId+".json";
+      if(level >= 6) {
+        return []
+      }
+      let result = []
+      let response = await axios.get(commentUrl)
+      try {
+        if(response.data[1].data.children[0].data.replies.data.children.length > 0) {
+          for(let i in response.data[1].data.children[0].data.replies.data.children) {
+            let reply = response.data[1].data.children[0].data.replies.data.children[i].data
+            if(!reply.collapsed) {
+              result.push({
+                id: reply.id,
+                title: (reply.body) ? reply.body.substring(0, 45) + "..." : "",
+                message: reply.body_html,
+                author: reply.author,
+                timestamp: new Date(reply.created_utc * 1000).toLocaleString(),
+                childs: await getChildren(reply.id, level + 1)
+              })
+            }
+          }
+        }
+        return result
+      } catch (e) {
+        return []
+      }
+
+    }
+
+    (async () => {
+      // let comment = await axios.get("https://www.reddit.com/r/changemyview/comments/103sqbf/cmv_preemployment_drug_testing_should_no_longer/j339o5e.json")
+      // console.log(comment.data[1].data.children[0].data.replies.data.children)
+      // return;
+      let response = await axios.get(questionUrl+".json")
+      const question = response.data[0].data.children[0].data
+      const result = [{
+        title: question.title,
+        message: question.selftext_html,
+        author: question.author,
+        timestamp: question.created_utc,
+        childs: []
+      }]
+      for (let i in response.data[1].data.children) {
+        if(i === 10) {
+          break;
+        }
+        let reply = response.data[1].data.children[i].data
+        if(!reply.collapsed){
+          result[0].childs.push({
+            id: reply.id,
+            title: (reply.body) ? reply.body.substring(0,45)+"..." : "",
+            message: reply.body_html,
+            author: reply.author,
+            timestamp: new Date(reply.created_utc * 1000).toLocaleString(),
+            childs: await getChildren(reply.id, 1)
+          })
+        }
+      }
+      this.messages = fixDepthAndKey(result, 0)
+      this.loading = false
+    })()
+
+  },
   computed: {
     // height() {
     //   return (this.fixedClasses.length * 51)
@@ -124,7 +205,7 @@ export default class Home extends Vue {}
 </script>
 <style lang="scss" scoped>
 .home {
-  max-width: 500px;
+  max-width: 800px;
   .top {
     height: 50px;
     box-sizing: border-box;

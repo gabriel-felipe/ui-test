@@ -29,7 +29,8 @@ const routes: Array<RouteConfig> = [
   {
     path: '/example-6',
     name: 'Home6',
-    component: Home6
+    component: Home6,
+    props: route => ({ thread: route.query.thread })
   },
   {
     path: '/example-4',

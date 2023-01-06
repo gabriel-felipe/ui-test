@@ -1,0 +1,330 @@
+[
+  {
+    "title": "How does dish soap eliminate bacteria?",
+    "message": "&lt;!-- SC_OFF --&gt;&lt;div class=\"md\"&gt;&lt;p&gt;I wondered this when washing my dishes with the same sponge. How is it that the soap + scrubbing = clean dishes and doesn’t transfer any bacteria from the previous dish?&lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;",
+    "author": "[deleted]",
+    "timestamp": 1672859457,
+    "childs": [
+      {
+        "id": "j2z5atr",
+        "title": "A bacteria cell consists of many different pa...",
+        "message": "&lt;div class=\"md\"&gt;&lt;p&gt;A bacteria cell consists of many different parts, but the relevant one here is called the &amp;quot;Bi-Lipid Layer&amp;quot;, which is a layer of lipids that enclose the cell and essentially function as its skin.&lt;/p&gt;\n\n&lt;p&gt;Lipids are a group of compounds that include organic fats, oils, and waxes.&lt;/p&gt;\n\n&lt;p&gt;In general, most things are either hydrophobic (fat/oil soluble, but not water soluble) or hydrophillic (water soluble but not lipid soluble).  Things are usually one or the other.&lt;/p&gt;\n\n&lt;p&gt;Detergents are somewhat unique in the fact that they are both hydrophillic &lt;em&gt;and&lt;/em&gt; hydrophobic - they bind to both oil and water, and allow them to be bonded together in very close proximity, where they would usually very strongly repel each other.&lt;/p&gt;\n\n&lt;p&gt;So, you have a bacteria with its lipidous cell wall, immersed in water.  The water is normally repelled by this layer, preventing the bacteria from dissolving into it.\nEnter a molecule of detergent.  This molecule bonds strongly to the bacteria&amp;#39;s protective lipid layer.  This causes a very strong attraction to the surrounding water, while adjacent lipid molecules, which are not bonded to detergent, strongly repel the water.  This bonding and attraction between a water molecule and the lipid molecule is now so strong that the bacterial cell wall rips and ruptures apart, thereby spilling its innards and killing the cell.&lt;/p&gt;\n\n&lt;p&gt;Edit: a commenter corrected my phrasing - the terminology is lipid bilayer, not bi-lipid layer.&lt;/p&gt;\n&lt;/div&gt;",
+        "author": "Ausoge",
+        "timestamp": 1672874450,
+        "childs": [
+          {
+            "id": "j309vsv",
+            "title": "Do you mind if I ask where you’re from? This ...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Do you mind if I ask where you’re from? This is the first time I’ve heard bi-lipid layer instead of lipid bilayer.&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "Old_Week",
+            "timestamp": 1672891480,
+            "childs": [
+              {
+                "id": "j30dz0p",
+                "title": "Australia.  And I've just googled it, and I c...",
+                "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Australia.  And I&amp;#39;ve just googled it, and I can&amp;#39;t find it referred to as bilipid layer anywhere, so my best explanation is a little brain-fart that somehow mixed up the phrasing in my head and got stuck that way lol.&lt;/p&gt;\n\n&lt;p&gt;Thanks for catching it!&lt;/p&gt;\n&lt;/div&gt;",
+                "author": "Ausoge",
+                "timestamp": 1672893508,
+                "childs": [
+                  {
+                    "id": "j30mt28",
+                    "title": "&gt;bi-lipid layer\n\nYou might have googled th...",
+                    "message": "&lt;div class=\"md\"&gt;&lt;blockquote&gt;\n&lt;p&gt;bi-lipid layer&lt;/p&gt;\n&lt;/blockquote&gt;\n\n&lt;p&gt;You might have googled the wrong place, google scholar has it: &lt;a href=\"https://scholar.google.ca/scholar?hl=en&amp;amp;as%5C_sdt=0%2C5&amp;amp;q=bi-lipid+layer&amp;amp;btnG=\"&gt;https://scholar.google.ca/scholar?hl=en&amp;amp;as\\_sdt=0%2C5&amp;amp;q=bi-lipid+layer&amp;amp;btnG=&lt;/a&gt;&lt;/p&gt;\n&lt;/div&gt;",
+                    "author": "zzing",
+                    "timestamp": 1672898328,
+                    "childs": [
+                      {
+                        "id": "j30w1ll",
+                        "title": "Well there ya go!  Thanks...",
+                        "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Well there ya go!  Thanks&lt;/p&gt;\n&lt;/div&gt;",
+                        "author": "Ausoge",
+                        "timestamp": 1672904599,
+                        "childs": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "j30epkv",
+                    "title": "I would’ve thought that if bi-lipid layer was...",
+                    "message": "&lt;div class=\"md\"&gt;&lt;p&gt;I would’ve thought that if bi-lipid layer was normal anywhere, it would be Australia. Everything is reversed there since you’re all upside down, no?&lt;/p&gt;\n&lt;/div&gt;",
+                    "author": "Old_Week",
+                    "timestamp": 1672893886,
+                    "childs": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "j319ov0",
+            "title": "Detergents are very similar to soaps which wo...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Detergents are very similar to soaps which work in the same way. This is why soap and water is an excellent way to kill bacteria and germs compared to alcohol based rubs. Alcohol will kill the germs, but they’ll remain there in almost a nutrient soup for other germs. Washing with soap and water kills it and disposes of the traces.&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "pirahno",
+            "timestamp": 1672915346,
+            "childs": []
+          },
+          {
+            "id": "j310b80",
+            "title": "Can't the Bacteria evolve to prevent this?...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Can&amp;#39;t the Bacteria evolve to prevent this?&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "abalawadhi",
+            "timestamp": 1672907863,
+            "childs": [
+              {
+                "id": "j312jgd",
+                "title": "Honestly, I don't know - evolution is capable...",
+                "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Honestly, I don&amp;#39;t know - evolution is capable of producing some pretty incredible results - but I doubt it.  It would require cells to either use something other than lipids to form their outer membrane, or to reinforce the layer to the point that the attractive molecular forces cannot break it.\nSuch an adaptation would so fundamentally change the way cells currently operate, that any drift in that direction would probably be incompatible with life.&lt;/p&gt;\n\n&lt;p&gt;A suitable analogy might be to ask if vertebrates could evolve to be totally immune to fire.  Like yeah, maybe, but the required physiological changes would be totally incompatible with life as we know it.&lt;/p&gt;\n&lt;/div&gt;",
+                "author": "Ausoge",
+                "timestamp": 1672909648,
+                "childs": [
+                  {
+                    "id": "j31ppqm",
+                    "title": "Its hard to imagine in between steps of evolu...",
+                    "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Its hard to imagine in between steps of evolution towards &amp;quot;detergent resistance/immunity&amp;quot; that would be selectively advantageous. Is that kinda what you&amp;#39;re getting at?&lt;/p&gt;\n&lt;/div&gt;",
+                    "author": "alvysinger0412",
+                    "timestamp": 1672925434,
+                    "childs": [
+                      {
+                        "id": "j32feis",
+                        "title": "there may not even be too much of an in-betwe...",
+                        "message": "&lt;div class=\"md\"&gt;&lt;p&gt;there may not even be too much of an in-between step to begin with. whether it is baby steps or a leap, it is both difficult to imagine&lt;/p&gt;\n&lt;/div&gt;",
+                        "author": "mad_method_man",
+                        "timestamp": 1672936106,
+                        "childs": []
+                      },
+                      {
+                        "id": "j32th5o",
+                        "title": "The habitat that requires this kind of resist...",
+                        "message": "&lt;div class=\"md\"&gt;&lt;p&gt;The habitat that requires this kind of resistance is the sewage system, I wonder how many generations of human are required to contribute to their evolution&lt;/p&gt;\n&lt;/div&gt;",
+                        "author": "SoftBaconWarmBacon",
+                        "timestamp": 1672941178,
+                        "childs": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "j31apjk",
+                "title": "Even if they don’t rupture, they’re getting w...",
+                "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Even if they don’t rupture, they’re getting washed away by magnitudes more water than they can deal with. (In a similar vein, I find general spray cleaners just as effective on unwanted insects as insecticides, but with no awful odors/volatiles, and ready to wipe clean.)&lt;/p&gt;\n\n&lt;p&gt;Bacteria can produce biofilms in an attempt to hold position, hence the need for scrubbing to break up their defenses.&lt;/p&gt;\n\n&lt;p&gt;Some soaps used to have antibacterials, but that just resulted in resistant bacteria wherever they ended up.&lt;/p&gt;\n&lt;/div&gt;",
+                "author": "nayhem_jr",
+                "timestamp": 1672916129,
+                "childs": []
+              },
+              {
+                "id": "j31j52t",
+                "title": "Not easily like with Antibiotics. Antibiotics...",
+                "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Not easily like with Antibiotics. Antibiotics are like scalpels, they target 1 very specific part of the bacteria and disrupt that part. By changing that part slightly, the antibiotic stops having an effect (or alternatively, they set up systems to pump the molecules of antibiotics out of the bacteria before they can do harm).&lt;/p&gt;\n\n&lt;p&gt;Meanwhile, soap is almost like a fire. It simply rips the entire membrane apart. In order to prevent this, they&amp;#39;d need to fundamentally change how the membrane is constructed. Fundamental changes like that are, while not impossible, basically unheard off in evolution.&lt;/p&gt;\n&lt;/div&gt;",
+                "author": "FogeltheVogel",
+                "timestamp": 1672921821,
+                "childs": []
+              }
+            ]
+          },
+          {
+            "id": "j31rdjc",
+            "title": "But it’s still wise to change out/boil the sp...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;But it’s still wise to change out/boil the sponge periodically? How come some sponges start to smell sour given this phenomena?&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "ReferenceMuch2193",
+            "timestamp": 1672926247,
+            "childs": [
+              {
+                "id": "j34rz1b",
+                "title": "Sponges, especially large and thick ones, are...",
+                "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Sponges, especially large and thick ones, are extremely porous and have an incredibly high surface area.  The more surface area there is, the more space bacteria has to grow - especially because a sponge likely has bits of food debris lodged in it to feed them.\nThis also makes it difficult for detergent to fully penetrate every nook and cranny, and a high bacterial load, combined with the large amount of lipids typically present in food, will very rapidly &amp;quot;use up&amp;quot; all available detergent in the sink.&lt;/p&gt;\n\n&lt;p&gt;I wouldn&amp;#39;t resort to cooking my sponges though - I don&amp;#39;t like the idea of broken-down plastics and petrochemicals from synthetic sponges making it onto my plate. \nLetting a sponge completely dry out between uses is pretty effective at killing germs, and always make sure you use lots of detergent when washing your dishes.  And yeah, regularly switch to a new sponge.&lt;/p&gt;\n&lt;/div&gt;",
+                "author": "Ausoge",
+                "timestamp": 1672967039,
+                "childs": [
+                  {
+                    "id": "j357w54",
+                    "title": "Thanks for the answer. Personally I only use ...",
+                    "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Thanks for the answer. Personally I only use Brillo sponges for heavy stuff and toss. I prefer dish cloths because I can wash them.&lt;/p&gt;\n&lt;/div&gt;",
+                    "author": "ReferenceMuch2193",
+                    "timestamp": 1672973699,
+                    "childs": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "j31swzl",
+            "title": "then why wasn't it enough to wash wounds with...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;then why wasn&amp;#39;t it enough to wash wounds with soap to prevent infection before antibiotics? And how come it doesn&amp;#39;t dissolve the lipid bilayer around human cells? And what about all the bacteria that live on soap?&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "Blakut",
+            "timestamp": 1672926961,
+            "childs": [
+              {
+                "id": "j34o9zh",
+                "title": "I'll address your questions one at a time.\n\nF...",
+                "message": "&lt;div class=\"md\"&gt;&lt;p&gt;I&amp;#39;ll address your questions one at a time.&lt;/p&gt;\n\n&lt;p&gt;First, detergents are close to 100% effective at killing germs, but they can only be applied to exposed surfaces - any bacteria that have infected deeper tissue, or are hidden in nooks and crannies, cannot be reached by detergenty water, so other treatment is needed.  Detergents cannot be applied internally - see the next part of my response for why.\nWith that said, regular hand-washing is one of the most effective disease-control measures we have.&lt;/p&gt;\n\n&lt;p&gt;Second, detergent absolutely does have this effect on human tissue.  Your skin cells in particular have evolved to be quite resilient, but detergent can and does kill them - fortunately your skin is made of many layers of cells, so damage is not immediately evident.  Your skin also secretes oils to keep it soft and protected, and these oils use up a good amount of detergent before it can get to the cells themselves.&lt;br/&gt;\nBut wash your hands with strong dish soap many times a day, and after a few days you&amp;#39;ll develop irritated, dry, cracking skin, with bleeding sores.\nThis is also why the whole tide-pod thing was so dangerous - your internal tissue has not developed the same resilience as your skin has, and eating high-strength detergents can cause &lt;em&gt;serious&lt;/em&gt; damage to your digestive tract.&lt;/p&gt;\n\n&lt;p&gt;Third, how can bacteria live on soap?\nPartly because of the reasons I mentioned in the previous paragraph, most body soaps have been developed to not so much kill bacteria and other cells, as dislodge them and allow them to be washed away.  This causes minimal damage to your skin, but still cleans it - the bacteria have been washed off, rather than killed.\nFurthermore, those soaps and detergents that ARE lethal to cells (like dish soap) are only effective in the presence of water.  See my original comment for more info there.&lt;/p&gt;\n&lt;/div&gt;",
+                "author": "Ausoge",
+                "timestamp": 1672965565,
+                "childs": []
+              }
+            ]
+          },
+          {
+            "id": "j31xi2b",
+            "title": "in addition to that. soapwater encapsules dir...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;in addition to that. soapwater encapsules dirt with soapwater so dirt can no longer stick to your skin or sponges and can be washed away. with washing it dirt away you wash away lots of bacteria and one of the main problems with bacteria is: the more are there the more likely it is to be infected. so soap does not only destroy bacteria, it also washes them away.&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "S-Markt",
+            "timestamp": 1672928991,
+            "childs": [
+              {
+                "id": "j34qmzo",
+                "title": "That's true.  Most hand-and-body soaps are de...",
+                "message": "&lt;div class=\"md\"&gt;&lt;p&gt;That&amp;#39;s true.  Most hand-and-body soaps are developed without detergents, and wash away bacteria cells rather than kill them - this is because detergents have the same effect on your skin cells as they do on bacteria, and repeated use for cleaning your body would cause injury over time.&lt;/p&gt;\n&lt;/div&gt;",
+                "author": "Ausoge",
+                "timestamp": 1672966495,
+                "childs": []
+              }
+            ]
+          },
+          {
+            "id": "j32di8b",
+            "title": "pretty sure this is false in most cases. What...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;pretty sure this is false in most cases. What really happens is the bacteria cant cling on to anything and they get washed away. Dish soaps have antibiotics though which will kill bacteria.&lt;/p&gt;\n\n&lt;p&gt;A good example is toothpaste. All the bacteria in your mouth don&amp;#39;t just die. In fact that would be bad, because something worse would take over.&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "BreezyZendo",
+            "timestamp": 1672935394,
+            "childs": []
+          }
+        ]
+      },
+      {
+        "id": "j2y76sg",
+        "title": "Soap contains emulsifiers which break down th...",
+        "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Soap contains emulsifiers which break down the membrane of bacterial cells. Emulsifiers are chemicals which allow oils (hydrophobic) and water (hydrophilic) to dissolve or mix in one another. They’re in everyday items such as ice cream paints etc.&lt;/p&gt;\n&lt;/div&gt;",
+        "author": "rrussell1995",
+        "timestamp": 1672861798,
+        "childs": [
+          {
+            "id": "j2yefoq",
+            "title": "What is ice cream paint?...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;What is ice cream paint?&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "dysfunctionalbrat",
+            "timestamp": 1672864417,
+            "childs": [
+              {
+                "id": "j2zn9pk",
+                "title": "That's when you take too big of a bite off yo...",
+                "message": "&lt;div class=\"md\"&gt;&lt;p&gt;That&amp;#39;s when you take too big of a bite off your cone and a little ice cream gets on your nose 😀&lt;/p&gt;\n&lt;/div&gt;",
+                "author": "SecondGuy",
+                "timestamp": 1672881747,
+                "childs": []
+              }
+            ]
+          },
+          {
+            "id": "j2yzgfx",
+            "title": "Does soap also break down the cell membrane o...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Does soap also break down the cell membrane of animal cells?&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "IgotthatBNAD",
+            "timestamp": 1672872179,
+            "childs": [
+              {
+                "id": "j2zwxxy",
+                "title": "Your outermost layer of skin cells is relativ...",
+                "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Your outermost layer of skin cells is relatively safe from this because it&amp;#39;s made to be less reactive and protect from outside threats like this (My detailed anatomy knowledge is fuzzy, but my understanding is that you&amp;#39;re basically protected by a layer of keratin, which soap does not act on), but yes it does break down animal cells, and this is one of the main reasons that soap is toxic to ingest.&lt;/p&gt;\n&lt;/div&gt;",
+                "author": "Krail",
+                "timestamp": 1672885745,
+                "childs": [
+                  {
+                    "id": "j32phli",
+                    "title": "So soap in the mouth for cursing damages more...",
+                    "message": "&lt;div class=\"md\"&gt;&lt;p&gt;So soap in the mouth for cursing damages more than just your emotional stability?&lt;/p&gt;\n&lt;/div&gt;",
+                    "author": "TooBuffForThisWorld",
+                    "timestamp": 1672939774,
+                    "childs": []
+                  }
+                ]
+              },
+              {
+                "id": "j2z8dox",
+                "title": "Yes....",
+                "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Yes.&lt;/p&gt;\n&lt;/div&gt;",
+                "author": "-Metacelsus-",
+                "timestamp": 1672875666,
+                "childs": []
+              },
+              {
+                "id": "j31jxvf",
+                "title": "Yes. That's why getting soap in an open wound...",
+                "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Yes. That&amp;#39;s why getting soap in an open wound is painful, and why drinking soap is so dangerous.&lt;/p&gt;\n\n&lt;p&gt;However, your outer skin is mostly immune to this as it&amp;#39;s not made of living cells, but rather a layer of dead cells that made some structures that resist this before they died.&lt;/p&gt;\n&lt;/div&gt;",
+                "author": "FogeltheVogel",
+                "timestamp": 1672922303,
+                "childs": []
+              }
+            ]
+          },
+          {
+            "id": "j30uswo",
+            "title": "So I can wash my hands in ice cream? Does ice...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;So I can wash my hands in ice cream? Does ice cream kill covid?&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "roesingape",
+            "timestamp": 1672903690,
+            "childs": []
+          },
+          {
+            "id": "j2ydcge",
+            "title": "Very interesting, thank you!...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Very interesting, thank you!&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "[deleted]",
+            "timestamp": 1672864026,
+            "childs": []
+          }
+        ]
+      },
+      {
+        "id": "j2ycc4s",
+        "title": "The sponge is definitely carrying bacteria fr...",
+        "message": "&lt;div class=\"md\"&gt;&lt;p&gt;The sponge is definitely carrying bacteria from dish one to dish two. But the soap + scrubbing is making the mechanical removal of food and bacteria much easier. Basically freeing it from adhesion to the surface of the dishes so that the final rinsing with water carries the bulk of it away and down the drain. I personally think sponges are gross and not good for cleaning things involved with eating. They harbor bacteria like it’s nobody’s business and you’re right to be questioning this. I’d recommend switching to a plastic bristled brush that you can fully rinse off between dishes and apply fresh squirts of dish soap to for each dish.&lt;/p&gt;\n&lt;/div&gt;",
+        "author": "fuckpudding",
+        "timestamp": 1672863668,
+        "childs": [
+          {
+            "id": "j2ync7e",
+            "title": "Really good idea to keep your sponge/scourer ...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Really good idea to keep your sponge/scourer dry between washing sessions, don&amp;#39;t leave it in the sink to stay moist and help bacteria survive.\nI often nuke the sponge/scourer in the microwave. Add soap, some water, put in bowl or plate and nuke on high for 2 minutes. \nAlso has the benefit of steaming up the inside of the microwave and makes the microwave easier to clean.&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "SubstantialExtent819",
+            "timestamp": 1672867634,
+            "childs": []
+          },
+          {
+            "id": "j2yx88t",
+            "title": "I rarely use a sponge but when I do I microwa...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;I rarely use a sponge but when I do I microwave a wet sponge for two minutes to kill bacteria. It’s extremely hot afterwards so be careful.&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "three9",
+            "timestamp": 1672871316,
+            "childs": []
+          },
+          {
+            "id": "j338ozg",
+            "title": "I use a plastic bristled brush too. Anytime I...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;I use a plastic bristled brush too. Anytime I run the dishshwasher I&amp;#39;ll put it in there to kill off additional bacteria. Otherwise it gets a thorough rinse and set upright in the counter drying rack. I don&amp;#39;t think I will ever return to sponges.&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "thapineapplequeen",
+            "timestamp": 1672946538,
+            "childs": []
+          },
+          {
+            "id": "j2ydaey",
+            "title": "Thanks for the answer, I’ll definitely be loo...",
+            "message": "&lt;div class=\"md\"&gt;&lt;p&gt;Thanks for the answer, I’ll definitely be looking in to finding an alternative.&lt;/p&gt;\n&lt;/div&gt;",
+            "author": "[deleted]",
+            "timestamp": 1672864005,
+            "childs": []
+          }
+        ]
+      },
+      {
+        "id": "j33g215",
+        "title": "From my understanding many soaps contain sulf...",
+        "message": "&lt;div class=\"md\"&gt;&lt;p&gt;From my understanding many soaps contain sulfactants and surfactants that disrupt the sulfur and surface tensions in the outer membrane of bacteria cells. &lt;/p&gt;\n\n&lt;p&gt;This disruption, in addition to lipid interactions and mechanical abrasion, makes many bacteria weaker; when the bacteria is then transferred plate to plate and to sponge it is less able to survive or reproduce. &lt;/p&gt;\n\n&lt;p&gt;Also after bacteria interact with soaps, regular water can act as a mild solvent further degrading the bacteria (and washing it away).&lt;/p&gt;\n&lt;/div&gt;",
+        "author": "JJdaCool",
+        "timestamp": 1672949154,
+        "childs": []
+      }
+    ]
+  }
+]

@@ -9,7 +9,7 @@
       <template v-if="postType === 'question'">
         <img src="@/assets/forum-logo.png" alt="">
 
-        <span>
+        <span :class="{'font-small': title.length > 110}">
           <slot></slot>
         </span>
       </template>
@@ -19,7 +19,7 @@
           <div class="snippet">{{ title }}</div>
         </div>
         <div class="right">
-          <span class="date">11/14/22 20:42</span>
+          <span class="date">{{ all.timestamp }}</span>
           <button>.....</button>
         </div>
 
@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div v-if="openChilds && childsCount > 2 && level > 1">
+    <div v-if="openChilds && childsCount > 2 && level > 2">
       <button @click.prevent="openChilds = !openChilds" class="expand-discussion">Hide Replies</button>
     </div>
     <div v-if="!openChilds && childs.length">
@@ -189,18 +189,26 @@ export default {
 
 <style scoped lang="scss">
 .message {
-  width: 500px;
+  width: 100%;
   position: relative;
 }
 
 .date {
   display: block;
-  font-size: 12px;
+  font-size: 10px;
   color: #8C8C8C !important;
   margin-top: 3px;
+  text-align: right;
   @media(max-width: 500px) {
     font-size: 10px;
   }
+}
+
+::v-deep blockquote {
+  border-left: 4px solid #888;
+  padding-left: 30px;
+  color: #888;
+  margin-left: 0;
 }
 .author {
   font-weight: 500;
@@ -215,6 +223,9 @@ export default {
   font-size: 16px;
   line-height: 30px;
   padding-bottom: 20px;
+  ::v-deep a {
+    word-break: break-all;
+  }
   &.question {
     padding-top: 20px;
   }
@@ -271,9 +282,7 @@ export default {
   transition: all .3s;
   border-left: 1px solid transparent;
   .top {
-    display: flex;
-    align-items: center;
-    flex-basis: auto;
+    width: calc(100% - 110px);
   }
   .right {
     display: flex;
@@ -284,7 +293,7 @@ export default {
       font-size: 10px;
       background: #fff;
       border: 1px solid #DADADA;
-      height: 24px;
+      height: 18px;
       border-radius: 2px;
       padding: 0;
       display: flex;
@@ -306,8 +315,11 @@ export default {
   visibility: hidden;
   font-size: 12px;
   margin-left: 5px;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   @media(max-width: 500px) {
-    max-width: 160px;
     font-size: 10px;
   }
 }
@@ -327,11 +339,12 @@ export default {
   max-height: 40px;
   height: 40px;
   border-left: #000 2px solid !important;
+  padding: 5px 5px 5px 5px;
   .author {
     font-size: 12px;
   }
   button {
-    width: 24px;
+    width: 18px;
     visibility: visible;
   }
 }
@@ -378,10 +391,11 @@ export default {
   &:not(.bigtitle) {
     height: 70px;
     position: fixed !important;
-    width: 490px;
-    max-width: calc(100vw);
+    width: 800px;
+    max-width: 100%;
     top: 0 !important;
     z-index: 999 !important;
+    align-items: center;
     &.sticky {
       padding: 10px;
     }
@@ -390,9 +404,13 @@ export default {
     margin-right: 20px;
   }
   span {
-    margin-top: -5px;
+    margin-top: 0px;
     transition: all .3s;
     transform-origin: 0 0;
+    width: 100%;
+  }
+  span.font-small {
+    font-size: 12px;
   }
 }
 
