@@ -121,7 +121,7 @@ const fixDepthAndKey = (messages, depth, parent) => {
     }
 
     if(this.thread) {
-      this.loading = true
+      this.loading = true;
       (async () => {
         // let comment = await axios.get("https://www.reddit.com/r/changemyview/comments/103sqbf/cmv_preemployment_drug_testing_should_no_longer/j339o5e.json")
         // console.log(comment.data[1].data.children[0].data.replies.data.children)

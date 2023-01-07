@@ -48,10 +48,10 @@
         </div>
       </div>
     </div>
-    <div v-if="openChilds && childsCount > 2 && level > 2">
+    <div v-if="openChilds && childsCount > 2 && level > 2" style="margin-top: 30px">
       <button @click.prevent="openChilds = !openChilds" class="expand-discussion">Hide Replies</button>
     </div>
-    <div v-if="!openChilds && childs.length">
+    <div v-if="!openChilds && childs.length" style="margin-top: 30px">
       <button @click.prevent="openChilds = !openChilds" class="expand-discussion">Expand Discussion <small>{{childsCount}} Replies</small></button>
     </div>
 <!--    <div class="shadow">-->
@@ -231,21 +231,30 @@ export default {
   font-size: 16px;
   color: #575757;
 }
+.title.reply.sticky + .body {
+  border-left: 2px solid #000;
+}
 .message .body {
   text-align: left;
-  padding: 10px;
+  padding: 0 10px 10px;
   position: relative;
   font-weight: 500;
   font-size: 16px;
   line-height: 30px;
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
-  margin-bottom: 20px;
+  border-left: 2px solid #dadada;
+  ::v-deep {
+    p:first-child, blockquote:first-child {
+      margin-top: 0;
+    }
+  }
   ::v-deep a {
     word-break: break-all;
   }
   &.question {
     padding-top: 20px;
+    border-left-color: transparent;
   }
   .actions {
     margin-top: 20px;
@@ -298,7 +307,7 @@ export default {
   height: 50px;
   transition: all .3s;
   cursor: pointer;
-  border-left: 1px solid transparent;
+  border-left: 2px solid #dadada;
   .top {
     width: calc(100% - 110px);
   }
