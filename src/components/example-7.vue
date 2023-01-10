@@ -347,7 +347,6 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   height: 0;
-  transition-delay: 250ms;
   @media(max-width: 500px) {
     font-size: 10px;
   }

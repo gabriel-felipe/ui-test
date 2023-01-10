@@ -30,6 +30,7 @@
 <script>
 import { Component, Vue } from 'vue-property-decorator';
 import MessageFixedComponent from '@/components/example-6.vue';
+// import DesktopSidebar from '@/components/desktop-sidebar.vue';
 import axios from 'axios';
 import messages from "../../scripts/103c1nz_converted-reddit.json";
 
