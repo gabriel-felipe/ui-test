@@ -19,7 +19,7 @@
           <div class="snippet">{{ title }}</div>
         </div>
         <div class="right">
-          <span class="date">{{ all.timestamp }}</span>
+          <span class="date"></span>
           <button>.....</button>
         </div>
 

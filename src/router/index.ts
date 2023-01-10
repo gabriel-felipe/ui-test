@@ -7,6 +7,7 @@ import Home4 from '../views/Home4.vue'
 import Home5 from '../views/Home5.vue'
 import Home6 from '../views/Home6.vue'
 import Home7 from '../views/Home7.vue'
+import Home8 from '../views/Home8.vue'
 import ReedSingleChild from '../views/ReedSingleChild.vue'
 
 Vue.use(VueRouter)
@@ -48,6 +49,11 @@ const routes: Array<RouteConfig> = [
     path: '/example-5',
     name: 'Home5',
     component: Home5
+  },
+  {
+    path: '/example-8',
+    name: 'Home8',
+    component: Home8
   },
   {
     path: '/reed-single-child',
